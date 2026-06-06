@@ -8,7 +8,6 @@ const STYLES = {
   header:
     "w-full bg-white/60 backdrop-blur-md border-b border-white/40 sticky top-0 z-50 px-8 py-4 flex items-center justify-between",
   logoContainer: "flex items-center gap-2.5 cursor-pointer select-none group",
-  // 💡 幾何学的なソリッド丸背景のロゴ枠！
   logoIconWrapper:
     "w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-base font-black shadow-sm transition-transform duration-300 group-hover:rotate-12 select-none",
   logoTextContainer: "flex flex-col",
@@ -35,25 +34,18 @@ export default function Header() {
 
   return (
     <header className={STYLES.header}>
-      {/* 🍊 ロゴエリア：悠仁のロゴ画像をいつでもハメ込めるように設計！ */}
       <Link href="/" className={STYLES.logoContainer}>
-        {/* 💡 今後、自分で作った横長ロゴ画像（例: logo.png）を適用したいときは、
-          下の <div className={STYLES.logoIconWrapper}>...</div> の部分を丸ごと消して、
-          <img src="/logo.png" alt="Balancy Logo" className="h-8 w-auto object-contain" /> 
-          に差し替えるだけで、一瞬で超綺麗な本物のブランドロゴに化けるよ！
-        */}
-        <img
-          src="/logo.png"
-          alt="Balancy Logo"
-          className="h-8 w-auto object-contain"
-        />
+        {/* 💡 頭文字の「B」は Balaful でも共通だからそのままでバッチリ馴染むよ！ */}
+        <div className={STYLES.logoIconWrapper}>
+          <span>B</span>
+        </div>
         <div className={STYLES.logoTextContainer}>
-          <h1 className={STYLES.logoTitle}>Balancy</h1>
+          <h1 className={STYLES.logoTitle}>Balaful</h1>{" "}
+          {/* 💡 ここを Balaful に変更！ */}
           <span className={STYLES.logoSubtitle}>Work-Life Harmony</span>
         </div>
       </Link>
 
-      {/* ナビゲーションバー */}
       <nav className={STYLES.nav}>
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.path;
