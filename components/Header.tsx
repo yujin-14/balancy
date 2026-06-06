@@ -8,8 +8,11 @@ const STYLES = {
   header:
     "w-full bg-white/60 backdrop-blur-md border-b border-white/40 sticky top-0 z-50 px-8 py-4 flex items-center justify-between",
   logoContainer: "flex items-center gap-2.5 cursor-pointer select-none group",
-  logoIconWrapper:
-    "w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-base font-black shadow-sm transition-transform duration-300 group-hover:rotate-12 select-none",
+
+  // 💡 ロゴ画像が綺麗に収まるように、プロ仕様のレスポンシブスタイルを追加！
+  logoImage:
+    "h-8 w-auto object-contain transition-transform duration-300 group-hover:rotate-6 select-none",
+
   logoTextContainer: "flex flex-col",
   logoTitle:
     "text-base font-extrabold tracking-wider text-neutral-800 uppercase",
@@ -34,18 +37,18 @@ export default function Header() {
 
   return (
     <header className={STYLES.header}>
+      {/* 🍊 ロゴエリア：logo.png をガッツリ反映する本物のマークアップに修正！ */}
       <Link href="/" className={STYLES.logoContainer}>
-        {/* 💡 頭文字の「B」は Balaful でも共通だからそのままでバッチリ馴染むよ！ */}
-        <div className={STYLES.logoIconWrapper}>
-          <span>B</span>
-        </div>
+        {/* 💡 悠仁が用意してくれた画像を、Next.jsが全自動でインターネットに配信してくれるよ！ */}
+        <img src="/logo.png" alt="Balaful Logo" className={STYLES.logoImage} />
+
         <div className={STYLES.logoTextContainer}>
-          <h1 className={STYLES.logoTitle}>Balaful</h1>{" "}
-          {/* 💡 ここを Balaful に変更！ */}
+          <h1 className={STYLES.logoTitle}>Balaful</h1>
           <span className={STYLES.logoSubtitle}>Work-Life Harmony</span>
         </div>
       </Link>
 
+      {/* ナビゲーションバー */}
       <nav className={STYLES.nav}>
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.path;
