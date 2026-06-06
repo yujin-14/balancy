@@ -1,0 +1,11 @@
+/* src/app/globals.css */
+@import "tailwindcss";
+
+/* 💡 Tailwind v4の秘密兵器：迷子のアリゴリズムに「ここを探せ！」と直接命令する */
+@source "../components/**/*.tsx";
+@source "./**/*.tsx";
+
+body {
+  @apply antialiased;
+  background-color: #fff9f5;
+}
