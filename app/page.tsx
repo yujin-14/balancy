@@ -26,13 +26,7 @@ export default function Home() {
     }
   }, []);
 
-  const handleHarvestTask = (id: string) => {
-    const filtered = tasks.filter((task) => task.id !== id);
-    setTasks(filtered);
-    localStorage.setItem("balancy_tasks", JSON.stringify(filtered));
-  };
-
-  // 📐 【プロのアルゴリズム】登録された「hh:mm」の文字列を比較して、時系列順に爆速自動ソート！
+  // 📐 開始時刻（startTime）を基準に、全自動で美しい時系列にソート！
   const sortedTasks = useMemo(() => {
     return [...tasks].sort((a, b) => a.startTime.localeCompare(b.startTime));
   }, [tasks]);
@@ -46,10 +40,9 @@ export default function Home() {
     [sortedTasks],
   );
 
-  // ⚖️ 【ロジック刷新】時間から「個数比率」ベースのクリーンな計算にアップデート！
+  // ⚖️ 今日の登録タスク数から、現在のリアルタイム天秤バランスを計算
   const score = useMemo(() => {
     if (todayTasks.length === 0) return 0;
-
     let workDrainCount = 0;
     let chargeCount = 0;
 
@@ -74,16 +67,15 @@ export default function Home() {
         <BalancyScale score={score} />
       </div>
       <div className={STYLES.rightCol}>
+        {/* 💡 onHarvest プロパティを完全に無くして、純粋なタイムライン手帳へ */}
         <TaskTimeline
-          title="Mikan Garden / 今日のタネ ☀️"
+          title="Mikan Garden / 今日のタイムライン ☀️"
           tasks={todayTasks}
-          onHarvest={handleHarvestTask}
-          emptyMessage="現在、今日植えられた蜜柑はありません。Taskページから「今日のタネ」を植えてみましょう 🌱"
+          emptyMessage="現在、今日の予定はありません。Taskページからタイムラインを追加してみましょう 🌱"
         />
         <TaskTimeline
-          title="Mikan Garden / 明日のヨテイ 🌙"
+          title="Mikan Garden / 明日のタイムライン 🌙"
           tasks={tomorrowTasks}
-          onHarvest={handleHarvestTask}
           emptyMessage="明日仕込む予定のご自愛はありますか？あらかじめタネを蒔いておきましょう ✨"
         />
       </div>

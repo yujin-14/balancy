@@ -8,9 +8,7 @@ const STYLES = {
   headerRow: "flex flex-col gap-1",
   pageTitle: "text-lg font-black tracking-tight text-neutral-800",
   pageSubtitle: "text-xs text-neutral-400 font-bold",
-
-  // 📢 アドセンス専用のグリッド
-  adsGrid: "grid grid-cols-1 md:grid-cols-2 gap-6 mt-4",
+  adsGrid: "grid grid-cols-1 md:grid-cols-2 gap-6 mt-2", // 💡 すっきり並ぶようにマージン調整
   adsCard:
     "bg-white/40 border border-dashed border-neutral-300 rounded-[24px] p-6 flex flex-col justify-between min-h-[220px] shadow-sm relative overflow-hidden",
   adsBadge:
@@ -19,7 +17,6 @@ const STYLES = {
     "w-full flex-1 flex items-center justify-center bg-neutral-100/70 border border-neutral-200/40 rounded-xl text-neutral-400 text-xs font-bold p-4 text-center select-none shadow-inner",
 };
 
-// 🔮 【プロのデータ設計】誤表示を防ぐため、特定の企業名を完全撤廃！純粋なスロットIDだけで勝負！
 const ADSENSE_DATABASE = [
   { slotId: "ca-pub-12345_slotA" },
   { slotId: "ca-pub-12345_slotB" },
@@ -31,11 +28,10 @@ const ADSENSE_DATABASE = [
 export default function RewardsPage() {
   const [displayAds, setDisplayAds] = useState<typeof ADSENSE_DATABASE>([]);
 
-  // 🎲 ページを開くたびに広告スロットを完全ランダムシャッフル！
   useEffect(() => {
     const shuffled = [...ADSENSE_DATABASE]
       .sort(() => Math.random() - 0.5)
-      .slice(0, 4); // 上位4つのスロットを動的にピックアップ
+      .slice(0, 4);
     setDisplayAds(shuffled);
   }, []);
 
@@ -49,13 +45,11 @@ export default function RewardsPage() {
         </p>
       </div>
 
-      {/* 🎰 ランダムで生成されたアドセンス広告の枠が並ぶエリア */}
+      {/* 🎰 余計なバナーを全廃し、純粋な広告コンポーネントだけが美しく整列する神画面 */}
       <div className={STYLES.adsGrid}>
         {displayAds.map((ad, index) => (
           <div key={ad.slotId} className={STYLES.adsCard}>
             <span className={STYLES.adsBadge}>スポンサー広告</span>
-
-            {/* 💡 将来本物のアドセンスコード（<ins className="adsbygoogle"... />）をそのままハメ込める聖地！ */}
             <div className={STYLES.adsSlotWrapper}>
               <div className="flex flex-col gap-2">
                 <span className="text-xl">📊 Google AdSense</span>
