@@ -7,8 +7,7 @@ const STYLES = {
     "w-full max-w-4xl mx-auto px-6 mt-10 flex flex-col gap-6 animate-fade-in pb-12",
   headerRow: "flex flex-col gap-1",
   pageTitle: "text-lg font-black tracking-tight text-neutral-800",
-  pageSubtitle: "text-xs text-neutral-400 font-bold",
-  adsGrid: "grid grid-cols-1 md:grid-cols-2 gap-6 mt-2", // 💡 すっきり並ぶようにマージン調整
+  adsGrid: "grid grid-cols-1 md:grid-cols-2 gap-6 mt-2",
   adsCard:
     "bg-white/40 border border-dashed border-neutral-300 rounded-[24px] p-6 flex flex-col justify-between min-h-[220px] shadow-sm relative overflow-hidden",
   adsBadge:
@@ -38,14 +37,10 @@ export default function RewardsPage() {
   return (
     <div className={STYLES.container}>
       <div className={STYLES.headerRow}>
+        {/* 💡 悠仁の指示通り、余計なサブタイトルの一行を綺麗に消去して超スッキリ！ */}
         <h2 className={STYLES.pageTitle}>Sponsored Content</h2>
-        <p className={STYLES.pageSubtitle}>
-          アドセンス広告枠の動的配備ステージ（ページを開くたびにランダムに切り替わります）
-          📢
-        </p>
       </div>
 
-      {/* 🎰 余計なバナーを全廃し、純粋な広告コンポーネントだけが美しく整列する神画面 */}
       <div className={STYLES.adsGrid}>
         {displayAds.map((ad, index) => (
           <div key={ad.slotId} className={STYLES.adsCard}>

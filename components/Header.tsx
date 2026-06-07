@@ -5,22 +5,24 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const STYLES = {
+  // 💡 flex-col と md:flex-row を組み合わせて、スマホでの文字被りを100%完全ガード！
   header:
-    "w-full bg-white/60 backdrop-blur-md border-b border-white/40 sticky top-0 z-50 px-8 py-4 flex items-center justify-between",
-  logoContainer: "flex items-center gap-2.5 cursor-pointer select-none group",
+    "w-full bg-white/60 backdrop-blur-md border-b border-white/40 sticky top-0 z-50 px-4 py-3 md:px-8 md:py-4 flex flex-col md:flex-row items-center justify-between gap-3.5 md:gap-0",
 
-  // 💡 ロゴ画像が綺麗に収まるように、プロ仕様のレスポンシブスタイルを追加！
+  logoContainer: "flex items-center gap-2.5 cursor-pointer select-none group",
   logoImage:
     "h-8 w-auto object-contain transition-transform duration-300 group-hover:rotate-6 select-none",
-
   logoTextContainer: "flex flex-col",
   logoTitle:
     "text-base font-extrabold tracking-wider text-neutral-800 uppercase",
   logoSubtitle:
     "text-[9px] font-bold tracking-widest text-neutral-400 uppercase -mt-0.5",
-  nav: "flex items-center gap-1 bg-neutral-100/60 p-1 rounded-2xl border border-neutral-200/20",
+
+  // 💡 スマホでメニューが窮屈にならないように、ちょっとだけ文字サイズとパディングを調整できるようにしたよ！
+  nav: "flex items-center gap-1 bg-neutral-100/60 p-1 rounded-2xl border border-neutral-200/20 max-w-full overflow-x-auto whitespace-nowrap",
   navLink:
-    "px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition-all duration-200 select-none",
+    "px-3 py-1.5 md:px-4 md:py-2 rounded-xl text-[11px] md:text-xs font-bold tracking-wide transition-all duration-200 select-none",
+
   activeLink: "bg-white text-orange-600 shadow-sm",
   inactiveLink: "text-neutral-500 hover:text-neutral-800 hover:bg-white/40",
 };
@@ -37,18 +39,16 @@ export default function Header() {
 
   return (
     <header className={STYLES.header}>
-      {/* 🍊 ロゴエリア：logo.png をガッツリ反映する本物のマークアップに修正！ */}
+      {/* ロゴエリア */}
       <Link href="/" className={STYLES.logoContainer}>
-        {/* 💡 悠仁が用意してくれた画像を、Next.jsが全自動でインターネットに配信してくれるよ！ */}
         <img src="/logo.png" alt="Balaful Logo" className={STYLES.logoImage} />
-
         <div className={STYLES.logoTextContainer}>
           <h1 className={STYLES.logoTitle}>Balaful</h1>
           <span className={STYLES.logoSubtitle}>Work-Life Harmony</span>
         </div>
       </Link>
 
-      {/* ナビゲーションバー */}
+      {/* ナビゲーションバー（スマホの時は下に綺麗にセパレートされるから絶対被らない！） */}
       <nav className={STYLES.nav}>
         {NAV_ITEMS.map((item) => {
           const isActive = pathname === item.path;
